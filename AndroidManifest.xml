@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest
+    android:compileSdkVersion="36"
+    android:compileSdkVersionCodename="16"
+    package="com.arisuu2007.immersiveaudio"
+    platformBuildVersionCode="36"
+    platformBuildVersionName="16"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-feature
+        android:name="android.hardware.bluetooth"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.faketouch"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+    <uses-feature
+        android:name="android.software.leanback"
+        android:required="false" />
+    <!-- Allows the app to view the configuration of the Bluetooth on the phone and to make and accept connections with paired devices. -->
+    <uses-permission
+        android:name="android.permission.BLUETOOTH" />
+    <!-- Allows the app to make use of foreground services. -->
+    <uses-permission
+        android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission
+        android:name="android.permission.QUICKBOOT_POWERON" />
+    <!-- Allows the app to have itself started as soon as the system has finished booting. This can make it take longer to start the phone and allow the app to slow down the overall phone by always running. -->
+    <uses-permission
+        android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- Allows the app to modify global audio settings such as volume and which speaker is used for output. -->
+    <uses-permission
+        android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <application
+        android:theme="@style/Theme.App"
+        android:label="immersive mode"
+        android:icon="@drawable/ic_sound_wave"
+        android:name="ru.g000sha256.bass_booster.MainApplication"
+        android:debuggable="true"
+        android:allowBackup="false"
+        android:supportsRtl="true"
+        android:banner="@drawable/ic_sound_wave"
+        android:extractNativeLibs="false"
+        android:roundIcon="@drawable/ic_sound_wave">
+        <activity
+            android:name="ru.g000sha256.bass_booster.MainActivity"
+            android:enabled="true"
+            android:exported="true"
+            android:launchMode="singleInstance">
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.MAIN" />
+                <category
+                    android:name="android.intent.category.LAUNCHER" />
+                <category
+                    android:name="android.intent.category.LEANBACK_LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action
+                    android:name="android.media.action.DISPLAY_AUDIO_EFFECT_CONTROL_PANEL" />
+                <category
+                    android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <receiver
+            android:name="ru.g000sha256.bass_booster.MainReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.BOOT_COMPLETED" />
+                <action
+                    android:name="android.intent.action.QUICKBOOT_POWERON" />
+                <action
+                    android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
+            </intent-filter>
+        </receiver>
+        <service
+            android:label="immersive mode"
+            android:name="ru.g000sha256.bass_booster.MainService"
+            android:enabled="true"
+            android:foregroundServiceType="mediaPlayback|mediaProjection" />
+        <meta-data
+            android:name="com.android.vending.derived.apk.id"
+            android:value="1" />
+    </application>
+</manifest>
